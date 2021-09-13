@@ -60,5 +60,19 @@ def GaussLegendreWeights(polyorder):
         W = 2.0 / ((1.0 - xis ** 2) * (DLegendre(polyorder, xis) ** 2))
         err = 0
     else:
-        err = 1  # we couldnt find any roots then we have no weights
+        err = 1  # we couldn't find any roots then we have no weights
     return [W, xis, err]
+
+
+# a, b: the interval of what we want to have its integral
+# polyorder 	: order of the Legendre polynomial to be used
+
+def GaussLegendreQuadrature(func, polyorder, a, b):
+    [Ws, xs, err] = GaussLegendreWeights(polyorder)
+    if err == 0:
+        ans = (b - a) * 0.5 * sum(Ws * func((b - a) * 0.5 * xs + (b + a) * 0.5))
+    else:
+        # (in case of error)
+        err = 1
+        ans = None
+    return [ans, err]
