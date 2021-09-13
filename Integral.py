@@ -76,3 +76,30 @@ def GaussLegendreQuadrature(func, polyorder, a, b):
         err = 1
         ans = None
     return [ans, err]
+
+
+# it's time to input the function that we want its integral in our code and it could be change any time for example
+# we want to test cos(x**2)+1
+def func(x):
+    return np.cos(x**2)+1
+
+
+# after inputting the function we should change the order for calculating the integral if we want more Accuracy but it
+# takes more time for increased order
+print("enter your order:  ")
+order = int(input())
+[Ws, xs, err] = GaussLegendreWeights(order)
+if err == 0:
+    print("Number of points  : ", order)
+    print("Weights  : ", Ws)     # this shows us the weights of related function
+    print("Roots    : ", xs)     # this one shows us the roots of related function
+
+else:
+    print("Roots/Weights evaluation failed")
+
+# Now we can calculate the integral with the order and our wanted interval and print the answer of it
+[ans, err] = GaussLegendreQuadrature(func, order, -1, 1)
+if err == 0:
+    print("Integral: ", ans)
+else:
+    print("Integral evaluation failed")
