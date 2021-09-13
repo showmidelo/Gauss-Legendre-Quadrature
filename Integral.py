@@ -98,7 +98,7 @@ else:
     print("Roots/Weights evaluation failed")
 
 # Now we can calculate the integral with the order and our wanted interval and print the answer of it
-[ans, err] = GaussLegendreQuadrature(func, order, -1, 1)
+[ans, err] = GaussLegendreQuadrature(func, order, -2, 2)
 if err == 0:
     print("Integral: ", ans)
 else:
