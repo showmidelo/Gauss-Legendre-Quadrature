@@ -51,3 +51,14 @@ def LegendreRoots(polyorder, tolerance=1e-20):
             roots = np.concatenate((-1.0 * roots, [0.0], roots[::-1]))
         err = 0  # successfully roots has been founded
     return [roots, err]
+
+
+def GaussLegendreWeights(polyorder):
+    W = []
+    [xis, err] = LegendreRoots(polyorder)
+    if err == 0:
+        W = 2.0 / ((1.0 - xis ** 2) * (DLegendre(polyorder, xis) ** 2))
+        err = 0
+    else:
+        err = 1  # we couldnt find any roots then we have no weights
+    return [W, xis, err]
